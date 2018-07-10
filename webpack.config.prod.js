@@ -6,9 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 //set noInfo to true in your projects to declutter the command line output
 export default {
-    debug: true,
     devtool: 'source-map',
-    noInfo: false,
     entry: {
         vendor: path.resolve(__dirname, 'src/vendor'),
         main: path.resolve(__dirname, 'src/index')
@@ -57,15 +55,27 @@ export default {
         new webpack.optimize.UglifyJsPlugin()
     ],
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loaders: [ 'babel' ]
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'html-loader'
+                    }
+                ]
             },
             {
                 test: /\.css$/,
-                loaders: ExtractTextPlugin.extract('css?sourceMap')
+                use: ['style-loader', 'css-loader']
             }
         ]
     }
