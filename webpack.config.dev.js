@@ -3,9 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 //set noInfo to true in your projects to declutter the command line output
 export default {
-    debug: true,
     devtool: 'inline-source-map',
-    noInfo: false,
     entry: [
         path.resolve(__dirname, 'src/app.module.js')
     ],
@@ -22,18 +20,28 @@ export default {
         })
     ],
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loaders: [ 'babel' ]
-        },
-        {
-            test: /\.css$/,
-            loaders: ['style', 'css']
-        },
-        {
-            test: /\.html$/,
-            loader: 'html'
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'html-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
     }
 };

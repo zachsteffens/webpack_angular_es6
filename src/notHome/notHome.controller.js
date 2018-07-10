@@ -1,7 +1,7 @@
-export default class homeController {
+export default class notHomeController {
     constructor($q) {
         'ngInject';
-        this.controllerName = 'home controller';
+        this.controllerName = 'not home controller';
     }
 
     getName() {
