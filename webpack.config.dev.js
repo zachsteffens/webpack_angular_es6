@@ -16,6 +16,7 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html',
+            //alternatively, you can use ejs to manually inject bundle js into the dev file.
             inject: true
         })
     ],
